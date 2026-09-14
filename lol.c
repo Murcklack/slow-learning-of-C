@@ -1,9 +1,11 @@
-#include "stdio.h"
+#include <stdio.h>
+int main(void)
+{    
+    int dollars;
+    double rubles, kurs;
+    scanf("%d %lf", &dollars, &kurs);
+    rubles = rubles * kurs;
+    printf("%.13lf\n", rubles);
 
-int main(void){
-
-  long code, operator, tri, dva, dva2;
-  scanf("+ %1ld %1ld %1ld %1ld %1ld", &code, &operator, &tri, &dva, &dva2);
-  printf("+%ld (%ld) %ld-%ld-%ld",code,operator,tri,dva,dva2);
-  return 0;
+    return 0;
 }
