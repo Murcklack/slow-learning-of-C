@@ -1,6 +1,7 @@
 #define _POSIX_C_SOURCE 199309L
 
 #include <stdio.h>
+<<<<<<< HEAD
 #include <time.h>
 #include <stdbool.h>
 #include <stdalign.h> // Необходим для спецификатора alignas в C11
@@ -64,4 +65,14 @@ int main() {
     printf("AVX-256 сложение:   %.0f [ns]\n", time_avx);
 
     return 0;
+=======
+int main(void){
+for(int i = 1;i <= 3; i++){
+	for (int j = 1; j<=3; j++){
+		printf("%d", i * j);
+	}
+	printf("\n");
+}
+return 0;
+>>>>>>> dae1eaf4d4d15635f669c253d861f990442d8cc7
 }
