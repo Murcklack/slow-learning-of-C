@@ -10,7 +10,7 @@ int main(void) {
   long long fi;
   long long d;
 
-  printf("public_key: ");
+  printf("Данные в формате (ключ модуль сообщение): ");
   scanf("%lld %lld %lld", &public_key, &module, &messege);
 
   for (long long i = 2; i < module; i++) {
