@@ -67,12 +67,7 @@ int main() {
     return 0;
 =======
 int main(void){
-for(int i = 1;i <= 3; i++){
-	for (int j = 1; j<=3; j++){
-		printf("%d", i * j);
-	}
-	printf("\n");
-}
+printf("Hello world!");
 return 0;
 >>>>>>> dae1eaf4d4d15635f669c253d861f990442d8cc7
 }
