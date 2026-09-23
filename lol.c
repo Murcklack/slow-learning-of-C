@@ -1,10 +1,17 @@
 #include <stdio.h>
-int main(void){
-for(int i = 1;i <= 3; i++){
-	for (int j = 1; j<=3; j++){
-		printf("%d", i * j);
+void print_bin(int n){
+	for(int i = 0; i < sizeof(n); i++){
+		print("%d", (n >> i)&1);
 	}
-	printf("\n");
+	print("\n");
+	return;
 }
-return 0;
+
+int main(){
+	char dec = 123;
+	char hex = 0x7b;
+	char oct = 0173;
+	char bin = 0b01111011;
+	print_bin(dec);
+	return 0;
 }
