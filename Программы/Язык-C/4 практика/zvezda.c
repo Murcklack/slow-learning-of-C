@@ -12,12 +12,12 @@ int min(int a, int b){
 
 
 int main(void) {
-  int C = 30, A = 15;
-  float speed = 0.2, F = 0.3, t=0;
+  int C = 80, A = 10;
+  float speed = 0.1, F = 0.3, t=0;
 
   while (1) {
     printf("\033[H"); // Возврат в верхний угол
-    for (int y = 0; y < 30; y++) { // Сколько строчек выплёвываем
+    for (int y = 0; y < 50; y++) { // Сколько строчек выплёвываем
       int x1 = round(C + A * sin(F * y + t));
       int x2 = round(C - A * sin(F * y + t));
       
