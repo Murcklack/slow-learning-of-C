@@ -1,4 +1,5 @@
-from string import printable 
+from string import printable
+
 
 def Zone(a,b,c,d):
     if c > b:
@@ -27,7 +28,7 @@ def Park(duration, hour):
     elif duration >= 300:
         sum += 500
     else:
-        0
+        sum += 0
     if night == True:
         sum += sum*0.2
     print(int(sum))
@@ -60,7 +61,7 @@ def Tecnologia(distance, speed):
 def Ip(a,b,c,d):
     for i in [a,b,c,d]:
         if i <= 250 and i >= 0:
-            0 
+            continue
         else:
             print("INVALID")
             return 0
