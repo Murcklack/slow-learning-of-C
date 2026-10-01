@@ -46,6 +46,6 @@ int main(void) {
       }
     }
     t = t + speed;
-  }
+    }
   return 0;
 }
