@@ -1,23 +1,25 @@
 #include <stdio.h>
-#include <stdio.h>
+
 
 int main(void) {
-  unsigned int a = 0x00C0FFEE;
-  
-  // sizeof(a) вернет размер переменной a в байтах (обычно это 4 байта для int)
-  int num_bytes = sizeof(a); 
-  
-  printf("Исходное число: 0x%08X\n\n", a);
+  unsigned int a = 0x1092;
+
+  int num_bytes = sizeof(a);
+  int bytes[num_bytes];
+
+  printf("Исходное число: 0x%x\n", a);
 
   for (int i = 0; i < num_bytes; i++) {
-    // Вычисляем, на сколько бит нужно сдвинуть число
     int shift = i * 8; 
-    
-    // Сдвигаем и накладываем маску 0xFF
     unsigned char byte = (a >> shift) & 0xFF;
-    
-    printf("Байт %d (сдвиг на %2d бит): %02X\n", i, shift, byte);
+    bytes[i] = byte;    
+    printf("Байт %d (сдвиг на %2d бит): %x\n", i, shift, byte);
   }
+  printf("0x");
+  for (int i = num_bytes; i >= 2; i--){
+    printf("%x",bytes[i]);
+  }
+  printf("%x%x",bytes[0],bytes[1]);
 
   return 0;
 }
