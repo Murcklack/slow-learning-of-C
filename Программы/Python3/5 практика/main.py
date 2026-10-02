@@ -290,5 +290,46 @@ def Haiku():
     else:
         print("Не хайку :(")
     
-Haiku()
+def sandwitch(x):
+    ## Шифровка
+    def shifr(a):
+        index = []
+        slovo = ""
+        for i in range(len(a)):
+            if i % 2 != 0:
+                index.append(i)
+        if len(a) % 2 != 0:
+                index.append(len(a)) 
+        for i in range(len(a),0,-1):
+            if i % 2 == 0:
+                index.append(i)
+        for b in index:
+            slovo += x[b-1]
+        print(slovo)
+        
+    x = [i for i in x]
+    if x[-1] != "#":
+        print("Где #?")
+    else:
+        x.pop(-1)
+        shifr(x)
 
+
+def variables(name):
+    if name.count("_") > 0:
+        name = name.split("_")
+        result = f'{name[0]}'
+        for x in range(1,len(name)):
+            result += name[x].capitalize()
+        print(result)
+        return 0
+    if any(i.isupper() for i in name) == True:
+        for i in range(len(name)):
+            if name[i].isupper() == True:
+                name = name[:i] + f"_{name[i].lower()}" + name[i+1:]
+                i += 1
+        print(name)
+        return 0
+    else:
+        print(name)
+print("Беееее")
