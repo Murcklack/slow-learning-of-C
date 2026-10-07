@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int perevod(unsigned int a, int num_bytes) {
-  int bytes[num_bytes];
+  unsigned char bytes[num_bytes];
   for (int i = 0; i < num_bytes; i++) {
     int shift = i * 8;
     unsigned char byte = (a >> shift) & 0xFF;
@@ -10,7 +10,8 @@ int perevod(unsigned int a, int num_bytes) {
   }
   printf("0x");
   for (int i = num_bytes - 1; i >= 2; i--) {
-    printf("%x", bytes[i]);
+    if (bytes[i] != 0)
+      printf("%x", bytes[i]);
   }
   printf("%x%x", bytes[0], bytes[1]);
 }
