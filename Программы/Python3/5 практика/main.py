@@ -18,7 +18,7 @@ def elka(N):
     print(" " * (N - 1) + "#")
 
 
-#elka(7)
+# elka(7)
 
 
 def Amstrong(N):
@@ -31,6 +31,7 @@ def Amstrong(N):
             cunt += 1
     print(cunt)
 
+
 def Sostavlenie_slova(text, word):
     text = [i for i in text]
     word = [i for i in word]
@@ -42,19 +43,22 @@ def Sostavlenie_slova(text, word):
     print(text)
 
     text = text[::-1]
-    
+
     for a in text.copy():
         if text.count(a) > 1:
             text.remove(a)
-    
+
     text = text[::-1]
-    
+
     print(text)
     if word == text:
         print("True")
     else:
         print("False")
+
+
 Sostavlenie_slova("kukushka", "kush")
+
 
 def guess_number():
     chislo = str(randint(1, 100))
@@ -100,13 +104,13 @@ def menu():
                 text.remove(x)
 
         text = text[::-1]
-        
+
         for a in text.copy():
             if text.count(a) > 1:
                 text.remove(a)
 
         text = text[::-1]
-        
+
         if text == word:
             print("email")
         else:
@@ -264,40 +268,40 @@ def validator():
             print(f"x {x}")
 
 
-#validator()
+# validator()
 
 
 def Haiku():
     line1 = input("Первая строка: ").lower()
-    line2 = input("Вторая строка: ").lower()  
+    line2 = input("Вторая строка: ").lower()
     line3 = input("Третья строка: ").lower()
     glas = ["а", "е", "ё", "и", "у", "о", "у", "ы", "э", "ю", "я"]
     lines = [line1, line2, line3]
     cunt1 = 0
     cunt2 = 0
     cunt3 = 0
-    
-    
+
     for i in range(len(lines)):
         if lines[i] == "":
-            print(f"Не хайку. Должно быть 3 строки. Добавь текст в строку {i+1}")
+            print(f"Не хайку. Должно быть 3 строки. Добавь текст в строку {i + 1}")
             return 0
-    
+
     for x in line1:
         if x in glas:
-            cunt1+=1
+            cunt1 += 1
     for x in line2:
         if x in glas:
-            cunt2+=1
+            cunt2 += 1
     for x in line3:
         if x in glas:
-            cunt3+=1
-    print(cunt1,cunt2,cunt3)
+            cunt3 += 1
+    print(cunt1, cunt2, cunt3)
     if cunt1 == 5 and cunt2 == 7 and cunt3 == 5:
         print("Хайку!")
     else:
         print("Не хайку :(")
-    
+
+
 def sandwitch(x):
     ## Шифровка
     def shifr(a):
@@ -307,14 +311,14 @@ def sandwitch(x):
             if i % 2 != 0:
                 index.append(i)
         if len(a) % 2 != 0:
-                index.append(len(a)) 
-        for i in range(len(a),0,-1):
+            index.append(len(a))
+        for i in range(len(a), 0, -1):
             if i % 2 == 0:
                 index.append(i)
         for b in index:
-            slovo += x[b-1]
+            slovo += x[b - 1]
         print(slovo)
-        
+
     x = [i for i in x]
     if x[-1] != "#":
         print("Где #?")
@@ -326,15 +330,15 @@ def sandwitch(x):
 def variables(name):
     if name.count("_") > 0:
         name = name.split("_")
-        result = f'{name[0]}'
-        for x in range(1,len(name)):
+        result = f"{name[0]}"
+        for x in range(1, len(name)):
             result += name[x].capitalize()
         print(result)
         return 0
     if any(i.isupper() for i in name) == True:
         for i in range(len(name)):
             if name[i].isupper() == True:
-                name = name[:i] + f"_{name[i].lower()}" + name[i+1:]
+                name = name[:i] + f"_{name[i].lower()}" + name[i + 1 :]
                 i += 1
         print(name)
         return 0
