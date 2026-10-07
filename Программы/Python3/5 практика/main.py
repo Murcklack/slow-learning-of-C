@@ -18,7 +18,7 @@ def elka(N):
     print(" " * (N - 1) + "#")
 
 
-# elka(20)
+#elka(7)
 
 
 def Amstrong(N):
@@ -31,7 +31,6 @@ def Amstrong(N):
             cunt += 1
     print(cunt)
 
-
 def Sostavlenie_slova(text, word):
     text = [i for i in text]
     word = [i for i in word]
@@ -42,15 +41,20 @@ def Sostavlenie_slova(text, word):
             text.remove(x)
     print(text)
 
+    text = text[::-1]
+    
     for a in text.copy():
         if text.count(a) > 1:
             text.remove(a)
-
+    
+    text = text[::-1]
+    
+    print(text)
     if word == text:
         print("True")
     else:
         print("False")
-
+Sostavlenie_slova("kukushka", "kush")
 
 def guess_number():
     chislo = str(randint(1, 100))
@@ -95,10 +99,14 @@ def menu():
             if x not in word:
                 text.remove(x)
 
+        text = text[::-1]
+        
         for a in text.copy():
             if text.count(a) > 1:
                 text.remove(a)
 
+        text = text[::-1]
+        
         if text == word:
             print("email")
         else:
@@ -332,4 +340,3 @@ def variables(name):
         return 0
     else:
         print(name)
-print("Беееее")
