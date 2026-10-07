@@ -327,6 +327,9 @@ def sandwitch(x):
         shifr(x)
 
 
+# sandwitch("wdor#")
+
+
 def variables(name):
     if name.count("_") > 0:
         name = name.split("_")
