@@ -31,7 +31,6 @@ def Amstrong(N):
             cunt += 1
     print(cunt)
 
-
 def Sostavlenie_slova(text, word):
     text = [i for i in text]
     word = [i for i in word]
@@ -57,7 +56,7 @@ def Sostavlenie_slova(text, word):
         print("False")
 
 
-Sostavlenie_slova("kukushka", "kush")
+# Sostavlenie_slova("kukushka", "kush")
 
 
 def guess_number():
@@ -301,6 +300,7 @@ def Haiku():
     else:
         print("Не хайку :(")
 
+# Haiku()
 
 def sandwitch(x):
     ## Шифровка
