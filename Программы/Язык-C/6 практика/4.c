@@ -4,35 +4,32 @@
 
 int main()
 {
-    // 1
-    int re[10];
-    int im[10];
-
+    int vse[20];
     srand(time(NULL));
     // 2
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i+=2)
     {
-        re[i] = (rand() % 65536) - 32768;
-        im[i] = (rand() % 65536) - 32768;
+        vse[i] = (rand() % 65536) - 32768;
+        vse[i+1] = (rand() % 65536) - 32768;
         // 3
-        printf("s[%d] = %.1f + j*(%.1f)\n", i, (float)re[i], (float)im[i]);
+        printf("s[%d] = %.1f + j*(%.1f)\n", (i+1)/2, (float)vse[i], (float)vse[i+1]);
     }
     // 4
 
     long long E = 0;
-    for (int k = 0; k < 10; k++)
+    for (int k = 0; k < 20; k+=2)
     {
-        E = E + ((long long)re[k] * re[k] + (long long)im[k] * im[k]);
+        E = E + ((long long)vse[k] * vse[k] + (long long)vse[k+1] * vse[k+1]);
     }
     printf("\nЭнергия сигнала E=%lld\n", E);
     // 5
     int max_re = 0;
     int max_re_i = 0;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 20; i+=2)
     {
-        if (max_re < re[i])
+        if (max_re < vse[i])
         {
-            max_re = re[i];
+            max_re = vse[i];
             max_re_i = i;
         }
     }
