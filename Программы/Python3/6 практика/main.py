@@ -7,6 +7,7 @@ def lottery():
         nums += [str(randint(1, 49))]
     print(" ".join(nums))
 
+# lottery()
 
 def dynamic(nums):
     numbers = nums.split(" ")
@@ -35,7 +36,7 @@ def Andrey(x, heights):
     print(len(heights) + 1)
 
 
-# Andrey(176, "215 210 207")
+#Andrey(176, "215 210 207")
 
 
 def coin():
@@ -54,7 +55,6 @@ def coin():
         count += 1
         print(" ".join(userfriendly) + f" (Попыток : {count})")
 
-
 def masterklad(map):
     zoloto = []
     for i in range(len(map)):
@@ -68,8 +68,8 @@ def masterklad(map):
     print(map)
 
 
-# depths = [1,3,2,5,4,6,1]
-# masterklad(depths)
+#depths = [1,3,2,6,5,4,6,1]
+#masterklad(depths)
 
 
 def luna(card):
@@ -90,7 +90,7 @@ def luna(card):
         print("Некорректный номер")
 
 
-# luna("4276440013361511")
+#luna("4276440013361512")
 
 
 def abbr(n, words):
@@ -108,7 +108,7 @@ def abbr(n, words):
             print(w)
 
 
-# abbr(3, "word localization internationalization")
+#abbr(3, "word localization internationalization")
 
 
 def obshaga(n, doors):
@@ -123,7 +123,7 @@ def obshaga(n, doors):
     print(f"Ответ: {svo}")
 
 
-# obshaga(3, ["1 10", "0 10", "10 10"])
+#obshaga(3, ["1 10", "0 10", "10 10"])
 
 
 def cycle_sdvg(n, k, a):
@@ -140,7 +140,7 @@ def cycle_sdvg(n, k, a):
     print(" ".join(symb[::-1]) + " " + " ".join(a))
 
 
-# cycle_sdvg(5,12,["1","2","3","4","5"])
+#cycle_sdvg(5,12,["1","2","3","4","5"])
 
 
 def circle_vibe(n, k):
@@ -159,7 +159,7 @@ def circle_vibe(n, k):
     return vibe, ludi[0]
 
 
-# circle_vibe(7, 3)
+#circle_vibe(5, 2)
 
 def dirty_data(grades):
     bukvi = ["отл", "хор", "уд", "неуд"]
@@ -176,7 +176,7 @@ def dirty_data(grades):
                 case "неуд": cleaned.append(2)
     print(cleaned)
 
-# dirty_data(["5", "неявка", "4", "хор", "", "148", "неуд"])
+#dirty_data(["5", "неявка", "4", "хор", "", "148", "неуд"])
 
 def robot(n,commands):
     commands = commands.lower().split(" ")
@@ -197,4 +197,4 @@ def robot(n,commands):
     print(f"{x} {y} / {abs(x)+abs(y)}")
           
 # robot(8,"U D L R U D L R")
-print("\n\n Я 200")
+print("\n\nЯ 200")
