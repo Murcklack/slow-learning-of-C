@@ -106,7 +106,7 @@ int main()
         for (int n = 0; n < SIZE; n++)
         {
             int p = sudoku[r][n];
-            if ((p != 1) & (p != 2) & (p != 3) & (p != 4) & (p != 5) & (p != 6) & (p != 7) & (p != 8) & (p != 9))
+            if ((p > 9) | (p < 1))
             {
                 printf("Странное число: %d в матрице", p);
                 return 0;
