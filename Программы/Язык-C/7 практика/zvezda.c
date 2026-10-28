@@ -1,119 +1,131 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
-int check_rows(int SIZE, int sudoku[SIZE][SIZE])
+char* czar_right(char text[100], int sdvig)
 {
-    for (int r = 0; r < SIZE; r++)
+    for (int i = 0; text[i] != '\0'; i++)
     {
-        int nums[SIZE];
-        for (int n = 0; n < SIZE; n++)
+        if (text[i] >= 65 && text[i] <= 90)
         {
-            nums[n] = sudoku[r][n];
-            for (int i = 0; i < n; i++)
+            int shift = text[i] + sdvig;
+            if (shift > 90)
             {
-                if (sudoku[r][n] == nums[i])
-                {
-                    printf("Ошибка, строка: %d номер: %d\n", r + 1, n + 1);
-                    return 1;
-                }
+                shift = shift % 90 + 64;
             }
+            text[i] = shift;
+        }
+        else if (text[i] >= 97 && text[i] <= 122)
+        {
+            int shift = text[i] + sdvig;
+            if (shift > 122)
+            {
+                shift = shift % 122 + 96;
+            }
+            text[i] = shift;
         }
     }
-    return 0;
-};
-int check_colums(int SIZE, int sudoku[SIZE][SIZE])
-{
-    for (int c = 0; c < SIZE; c++)
-    {
-        int nums[SIZE];
-        for (int n = 0; n < SIZE; n++)
-        {
-            nums[n] = sudoku[n][c];
-            for (int i = 0; i < n; i++)
-            {
-                if (sudoku[n][c] == nums[i])
-                {
-                    printf("Ошибка, столбец: %d номер: %d\n", c + 1, n + 1);
-                    return 1;
-                }
-            }
-        }
-    }
-    return 0;
-};
-
-int check_squares(int SIZE, int sudoku[SIZE][SIZE])
-{
-    int count = 0;
-    while (count < SIZE)
-    {
-        int row_tek_kv = (count / 3) * 3;
-        int col_tek_kv = (count % 3) * 3;
-
-        int nums[SIZE];
-
-        for (int i = 0; i < SIZE; i++)
-        {
-            int r = row_tek_kv + (i / 3);
-            int c = col_tek_kv + (i % 3);
-            nums[i] = sudoku[r][c];
-
-            for (int j = 0; j < i; j++)
-            {
-                if (sudoku[r][c] == nums[j])
-                {
-                    printf("Ошибка, квадрат номер: %d\n", count + 1);
-                    return 1;
-                }
-            }
-        }
-        count += 1;
-    }
-    return 0;
+    return text;
 }
 
-int is_valid_sudoku(int SIZE, int sudoku[SIZE][SIZE])
+char* czar_left(char text[100], int sdvig)
 {
-    int r = check_rows(SIZE, sudoku);
-    int c = check_colums(SIZE, sudoku);
-    int s = check_squares(SIZE, sudoku);
+    for (int i = 0; text[i] != '\0'; i++)
+    {
+        if (text[i] >= 65 && text[i] <= 90)
+        {
+            int shift = text[i] - sdvig;
+            if (shift < 65)
+            {
+                shift = 91 - (65 - shift);
+            }
+            text[i] = shift;
+        }
+        else if (text[i] >= 97 && text[i] <= 122)
+        {
+            int shift = text[i] - sdvig;
+            if (shift < 97)
+            {
+                shift = 123 - (97 - shift);
+            }
+            text[i] = shift;
+        }
+    }
+    return text;
+}
+int vzlom_jopi(char text[100])
+{
+    int best_shift = 0;
+    int max_e_t_count = -1;
+    char best_text[100];
 
-    printf("Проверка строк: %d\n", r);
-    printf("Проверка столбцов: %d\n", c);
-    printf("Проверка квадратов: %d\n", s);
+    for (int s = 0; s < 26; s++)
+    {
+        char temp[100];
+        strcpy(temp, text);
+        
+        czar_left(temp, s);
 
-    if (r == 1 || c == 1 || s == 1)
-        return 1;
-    return 0;
+        int e_t_count = 0;
+        for (int i = 0; temp[i] != '\0'; i++)
+        {
+            if (temp[i] == 'e' || temp[i] == 'E' || temp[i] == 't' || temp[i] == 'T')
+            {
+                e_t_count++;
+            }
+        }
+
+        if (e_t_count >= max_e_t_count)
+        {
+            max_e_t_count = e_t_count;
+            best_shift = s;
+            strcpy(best_text, temp);
+        }
+    }
+
+    strcpy(text, best_text); 
+    return best_shift;
 }
 
 int main()
 {
-#define SIZE 9
+    char text[100];
+    int sdvig;
+    int direction = 0; // 0 сдвиг вправо, 1 влево
 
-    int sudoku[SIZE][SIZE] = {
-        {5, 3, 4, 6, 7, 8, 9, 1, 2},
-        {5, 7, 2, 1, 9, 5, 3, 4, 8},
-        {1, 9, 8, 3, 4, 2, 5, 6, 7},
-        {8, 5, 9, 7, 6, 1, 4, 2, 3},
-        {4, 2, 6, 8, 5, 3, 7, 9, 1},
-        {7, 1, 3, 9, 2, 4, 8, 5, 6},
-        {9, 6, 1, 5, 3, 7, 2, 8, 4},
-        {2, 8, 7, 4, 1, 9, 6, 3, 5},
-        {3, 4, 5, 2, 8, 6, 1, 7, 9}};
+    printf("Шифровка/расшифровка? (0/1): ");
+    scanf("%d", &direction);
+    getchar();
 
-    for (int r = 0; r < SIZE; r++)
-    {
-        for (int n = 0; n < SIZE; n++)
-        {
-            int p = sudoku[r][n];
-            if ((p > 9) | (p < 1))
-            {
-                printf("Странное число: %d в матрице", p);
-                return 0;
-            }
-        }
+    printf("Введи текст: ");
+    scanf("%99[^\n]", text);
+
+    printf("Введи сдвиг: ");
+    scanf("%d", &sdvig);
+
+
+    if (sdvig < 0){
+        direction = !direction;
+        sdvig = abs(sdvig);
     }
-    is_valid_sudoku(SIZE, sudoku);
 
+    sdvig = sdvig % 26;
+
+    if (direction == 2){
+        int found_shift = vzlom_jopi(text);
+        printf("Найденный сдвиг: %d\n", found_shift);
+        printf("Результат: %s\n", text);
+    }
+    else if (direction == 0)
+    {
+        printf("Result: %s\n", czar_right(text, sdvig));
+    }
+    else
+    {
+        printf("Result: %s\n", czar_left(text, sdvig));
+    }
+
+    printf("\n");
     return 0;
 }

@@ -1,118 +1,102 @@
 #include <stdio.h>
+#include <string.h>
 
-double determintion(int N, double matrix[N][N])
+int vivod_raz(char nehvatka[], int n_i, char povtor[], int p_i, char lish[], int l_i)
 {
-    if (N == 1)
+    if (n_i != 0)
     {
-        return matrix[0][0];
-    }
-    if (N == 2)
-    {
-        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        nehvatka[n_i] = '\0';
+        printf("В b нехватает: ");
+        printf("%s\n", nehvatka);
     }
 
-    double det = 0.0;
-    double submatrix[N - 1][N - 1];
-
-    for (int j = 0; j < N; j++)
+    if (p_i != 0)
     {
-        int min_str_index = 0;
+        povtor[p_i] = '\0';
+        printf("В b повторяется: ");
+        printf("%s\n", povtor);
+    }
 
-        for (int r = 1; r < N; r++)
+    if (l_i != 0)
+    {
+        lish[l_i] = '\0';
+        printf("В b лишние: ");
+        printf("%s\n", lish);
+    }
+    if (l_i != 0 || p_i != 0 || n_i != 0){
+        return 1;
+    }
+    return 0;
+}
+
+int sravn(char a[], char b[])
+{
+    char povtor[strlen(a) + 1];
+    int p_i = 0;
+    char nehvatka[strlen(a) + 1];
+    int n_i = 0;
+    char lish[strlen(a) + 1];
+    int l_i = 0;
+
+    for (unsigned int i = 0; i < strlen(a); i++)
+    {
+        int count = 0;
+        for (unsigned int k = 0; k < strlen(b); k++)
         {
-            int min_stolb_index = 0;
-            for (int c = 0; c < N; c++)
+            if (b[k] == a[i])
             {
-                if (c == j)
-                {
-                    continue;
-                }
-                submatrix[min_str_index][min_stolb_index] = matrix[r][c];
-                min_stolb_index++;
+                count++;
             }
-            min_str_index++;
         }
-        double sign;
-        if (j % 2 == 0)
+        if (count == 0)
         {
-            sign = 1.0;
+            nehvatka[n_i] = a[i];
+            n_i++;
         }
-        else
+        else if (count > 1)
         {
-            sign = -1.0;
+            povtor[p_i] = a[i];
+            p_i++;
         }
-        det += sign * matrix[0][j] * determintion(N - 1, submatrix);
     }
-    return det;
+    for (unsigned int i = 0; i < strlen(b); i++)
+    {
+        int count = 0;
+        for (unsigned int k = 0; k < strlen(a); k++)
+        {
+            if (b[i] == a[k])
+            {
+                count++;
+            }
+        }
+        if (count == 0)
+        {
+            lish[l_i] = b[i];
+            l_i++;
+        }
+    }
+    if (vivod_raz(nehvatka, n_i, povtor, p_i, lish, l_i) != 0){
+        return 1;
+    }
+    return 0;
 }
 
 int main()
 {
-    int N;
-    printf("Введи размерность матрицы коэффициентов NxN: ");
-    if (scanf("%d", &N) != 1 || N <= 0)
-    {
-        printf("Ошибка ввода размера!\n");
-        return 1;
-    }
-    double matrix[N][N];
-    double freedom[N];
+    char a[] = "listen";
+    char b[] = "topten";
 
-    for (int i = 0; i < N; i++)
+    if ((int)strlen(a) != (int)strlen(b))
     {
-        printf("\n--- Заполнение %d-го уравнения ---\n", i + 1);
-
-        for (int j = 0; j < N; j++)
-        {
-            printf("Введи коэффициент x_%d (строка %d, столбец %d): ", j + 1, i + 1, j + 1);
-            scanf("%lf", &matrix[i][j]);
-        }
-
-        printf("Введи свободный коэффициент (результат %d уравнения): ", i + 1);
-        scanf("%lf", &freedom[i]);
-    }
-
-    printf("\nПроверяй введенную систему:\n");
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            printf("%7.2f ", matrix[i][j]);
-        }
-        printf("| %7.2f\n", freedom[i]);
-    }
-    char ans;
-    printf("Продолжить? (Y/N)\n");
-    scanf(" %c", &ans);
-    if (ans == 'N' || ans == 'n')
-    {
+        printf("Братааан... Количество букв в a != b");
         return 0;
     }
 
-    double main_d = determintion(N, matrix);
-    printf("Определитель: %f\n", main_d);
-    if (main_d == 0)
-    {
-        printf("Главный определитель равен 0! Метод Крамера неприменим, беее :/\n");
-        return 0;
+    if (sravn(a,b) == 0){
+        printf("Анаграммы");
     }
-
-    for (int i = 0; i < N; i++)
-    {
-        double help_matrix[N][N];
-        for (int row = 0; row < N; row++)
-        {
-            for (int col = 0; col < N; col++)
-            {
-                if (col == i)
-                {
-                    help_matrix[row][col] = freedom[row];
-                    continue;
-                }
-                help_matrix[row][col] = matrix[row][col];
-            }
-        }
-        printf("x%d = %f\n", i + 1, determintion(N, help_matrix) / main_d);
+    else{
+        printf("\nНе анаграммы\n");
     }
 
     return 0;

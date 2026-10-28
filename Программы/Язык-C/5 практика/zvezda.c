@@ -1,40 +1,58 @@
 #include <stdio.h>
 
-int route_packet(unsigned int incoming_ip, unsigned int gateway_ip, int cidr_prefix){
-    if ((cidr_prefix > 32) | (cidr_prefix < 1)){
-        printf("-1");
-        return -1;
+int main()
+{
+  int N;
+  printf("Введи N\n");
+  scanf("%d", &N);
+
+  int matrix[N][N];
+
+  int chislo = 1;
+
+  int verh = 0;
+  int niz = N - 1;
+  int left = 0;
+  int right = N - 1;
+
+  while (chislo <= N * N)
+  {
+    for (int i = left; i <= right; i++)
+    { // заполняем слева направо
+      matrix[verh][i] = chislo;
+      chislo++;
     }
+    verh++; // Верхнюю границу двинем вниз
 
-
-    int temp_mask = 0;
-    for(int i = 0; i < cidr_prefix; i++){
-        temp_mask = (temp_mask << 1) | 1;
-        printf("%.8x\n", temp_mask);
+    for (int i = verh; i <= niz; i++)
+    {
+      matrix[i][right] = chislo;
+      chislo++;
     }
+    right--; // Двигаем правую грань влево
 
-    int mask = temp_mask;
-    for(int i = 0; i < (32 - cidr_prefix); i++){
-        mask <<=1;
-        printf("%.8x\n", mask);
+    for (int i = right; i >= left; i--)
+    {
+      matrix[niz][i] = chislo;
+      chislo++;
     }
-    if ((incoming_ip & mask) == (gateway_ip & mask)){
-        printf("1");
-        return 1;
+    niz--; // Двигаем низ вверх
+
+    for (int i = niz; i >= verh; i--)
+    {
+      matrix[i][left] = chislo;
+      chislo++;
     }
-    else{
-        printf("0");
-        return 0;
+    left++; // Двигаем лево направо
+  }
+  for (int i = 0; i < N; i++)
+  {
+    for (int x = 0; x < N; x++)
+    {
+      printf("%3d", matrix[i][x]);
     }
-}
+    printf("\n");
+  }
 
-int main(){
-    unsigned int incoming_ip = 0x7FFFFFF;
-    unsigned int gateway_ip = 0x10000000;
-    int cidr_prefix = 24;
-
-    route_packet(incoming_ip,gateway_ip,cidr_prefix);
-
-
-    return 0;
+  return 0;
 }

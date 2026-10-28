@@ -1,49 +1,51 @@
+#include <math.h>
 #include <stdio.h>
+#include <unistd.h>
+
+int max(int a, int b) { return (a > b ? a : b); }
+
+int min(int a, int b) { return (a < b ? a : b); }
 
 int main(void) {
-  long long public_key;
-  long long module;
-  long long messege;
-  long long q;
-  long long p;
-  long long fi;
-  long long d;
+  int C = 80, A = 10;
+  float speed = 0.1, F = 0.3, t = 0;
 
-  printf("Данные в формате (ключ модуль сообщение): ");
-  scanf("%lld %lld %lld", &public_key, &module, &messege);
+  while (1) {
+    printf("\033[H");              // Возврат в верхний угол
+    for (int y = 0; y < 50; y++) { // Сколько строчек выплёвываем
+      int x1 = round(C + A * sin(F * y + t));
+      int x2 = round(C - A * sin(F * y + t));
 
-  for (long long i = 2; i < module; i++) {
-    if (module % i == 0) {
-      p = i;
-      q = module / i;
-      break;
+      int L = min(x1, x2);
+      int R = max(x1, x2);
+
+      for (int i = 0; i < L; i++) {
+        printf(" ");
+      }
+      int distance = R - L;
+      if (distance == 0) {
+        printf("x\033[K\n"); // \033[K\n стирает остатки (очистка до
+                             // конца строки)
+      }
+
+      else {
+        int spaceBTW = distance - 1;
+        printf("0");
+        if (y % 2 == 0) {
+          printf("\033[32m");
+          for (int i = 0; i < spaceBTW; i++) {
+            printf("-");
+          }
+        } else {
+          printf("\033[33m");
+          for (int i = 0; i < spaceBTW; i++) {
+            printf("-");
+          }
+        }
+        printf("\033[0m 0 \033[K\n");
+      }
     }
-  }
-
-  fi = (p - 1) * (q - 1);
-  for (long long i = 1; 1; i++) {
-    if ((i * public_key) % fi == 1) {
-      d = i;
-      break;
+    t = t + speed;
     }
-  }
-
-  long long symb = 1;
-
-  for (long long i = 0; i < d; i++) {
-    symb = (symb * messege) % module;
-  }
-
-  // Пример
-  // (3^4)%5
-  // 1 шаг = (1*3) % 5 == 3
-  // 2 шаг = (3*3) % 5 == 4
-  // 3 шаг = (4*3) % 5 == 2
-  // 4 шаг = (2*3) % 5 == 1
-  // Ответ: 1 == 3^4 % 5 == 81 %5
-  // Тем самым мы не заставляем возводить число в степень и получать громадную
-  // штуку, которую не переварит наш ПК
-
-  printf("Символ: %c", (char)symb);
   return 0;
 }

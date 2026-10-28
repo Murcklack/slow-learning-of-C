@@ -1,11 +1,19 @@
 #include <stdio.h>
-// Отделяем последнюю цифру и складываем её в S
+
 int main(void) {
-  int a = 514999, k, s;
-  for (int n = a, s = 0; n != 0; n = n / 10) {
-    k = n % 10;
-    s = s + k;
-    printf("%d-%d\n", k, s);
+  int height, weight;
+  int ascii = 65;
+  printf("Задай параметр фигуры: ");
+  scanf("%d", &height);
+  weight = height;
+
+  for (int i = 0; i < height; i++) {
+    for (int n = 0; n < weight; n++) {
+      printf("%c", ascii);
+    }
+    weight--;
+    printf("\n");
+    ascii++;
   }
   return 0;
 }

@@ -1,97 +1,119 @@
 #include <stdio.h>
 
-int max_min(int price[], int n)
+double determintion(int N, double matrix[N][N])
 {
-  int max = price[0];
-  int min = price[0];
-  int max_day = 1;
-  int min_day = 1;
-  for (int i = 1; i < n; i++)
-  {
-    if (price[i] > max)
+    if (N == 1)
     {
-      max = price[i];
-      max_day = i + 1;
+        return matrix[0][0];
     }
-  }
-  for (int i = 1; i < n; i++)
-  {
-    if (price[i] < min)
+    if (N == 2)
     {
-      min = price[i];
-      min_day = i + 1;
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
     }
-  }
-  printf("Минимальная прибыль: %dр - %d день\n", min, min_day);
-  printf("Максимальная прибыль: %dр - %d день\n", max, max_day);
-  return 0;
-}
 
-int max_prosad(int price[], int n)
-{
+    double det = 0.0;
+    double submatrix[N - 1][N - 1];
 
-  int max_cen = 0, cena = 0, max_prosad = 0, max_day = 0, start = 0, end = 0;
-  for (int i = 0; i < n; i++)
-  {
-    cena = price[i];
-    if (cena > max_cen)
+    for (int j = 0; j < N; j++)
     {
-      max_cen = cena;
-      max_day = i + 1;
-    }
-    int prosadka = max_cen - cena;
-    if (prosadka > max_prosad)
-    {
-      max_prosad = prosadka;
-      start = max_day;
-      end = i + 1;
-    }
-  }
-  printf("Максимальная просадка: %dр, начало - %d, конец - %d\n", max_prosad,
-         start, end);
-  return 0;
-}
+        int min_str_index = 0;
 
-int max_period(int price[], int n)
-{
-  int period = 0, start = 1, end = 0, max_period = 0, max_start = 0,
-      max_end = 0;
-  for (int i = 0; i < n; i++)
-  {
-    if ((price[i] <= price[i + 1]) & (i < n - 1))
-    {
-      period++;
+        for (int r = 1; r < N; r++)
+        {
+            int min_stolb_index = 0;
+            for (int c = 0; c < N; c++)
+            {
+                if (c == j)
+                {
+                    continue;
+                }
+                submatrix[min_str_index][min_stolb_index] = matrix[r][c];
+                min_stolb_index++;
+            }
+            min_str_index++;
+        }
+        double sign;
+        if (j % 2 == 0)
+        {
+            sign = 1.0;
+        }
+        else
+        {
+            sign = -1.0;
+        }
+        det += sign * matrix[0][j] * determintion(N - 1, submatrix);
     }
-    else
-    {
-      end = i + 1;
-      if (period > max_period)
-      {
-        max_period = period;
-        max_start = start;
-        max_end = end;
-      }
-      period = 0;
-      start = i + 1;
-    }
-  }
-  printf("Период роста дни:");
-  for (int i = max_start; i <= max_end; i++)
-  {
-    printf(" %d", i);
-  }
-  printf(" => период из %d дней\n", max_period);
-  return 0;
+    return det;
 }
 
 int main()
 {
-  int price[15] = {100, 102, 105, 103, 98, 96, 99, 104,
-                   110, 108, 112, 118, 115, 111, 117};
-  int n = sizeof(price) / sizeof(price[0]);
-  max_min(price, n);
-  max_prosad(price, n);
-  max_period(price, n);
+    int N;
+    printf("Введи размерность матрицы коэффициентов NxN: ");
+    if (scanf("%d", &N) != 1 || N <= 0)
+    {
+        printf("Ошибка ввода размера!\n");
+        return 1;
+    }
+    double matrix[N][N];
+    double freedom[N];
 
-  return 0;
+    for (int i = 0; i < N; i++)
+    {
+        printf("\n--- Заполнение %d-го уравнения ---\n", i + 1);
+
+        for (int j = 0; j < N; j++)
+        {
+            printf("Введи коэффициент x_%d (строка %d, столбец %d): ", j + 1, i + 1, j + 1);
+            scanf("%lf", &matrix[i][j]);
+        }
+
+        printf("Введи свободный коэффициент (результат %d уравнения): ", i + 1);
+        scanf("%lf", &freedom[i]);
+    }
+
+    printf("\nПроверяй введенную систему:\n");
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            printf("%7.2f ", matrix[i][j]);
+        }
+        printf("| %7.2f\n", freedom[i]);
+    }
+    char ans;
+    printf("Продолжить? (Y/N)\n");
+    scanf(" %c", &ans);
+    if (ans == 'N' || ans == 'n')
+    {
+        return 0;
+    }
+
+    double main_d = determintion(N, matrix);
+    printf("Определитель: %f\n", main_d);
+    if (main_d == 0)
+    {
+        printf("Главный определитель равен 0! Метод Крамера неприменим, беее :/\n");
+        return 0;
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        double help_matrix[N][N];
+        for (int row = 0; row < N; row++)
+        {
+            for (int col = 0; col < N; col++)
+            {
+                if (col == i)
+                {
+                    help_matrix[row][col] = freedom[row];
+                    continue;
+                }
+                help_matrix[row][col] = matrix[row][col];
+            }
+        }
+        printf("x%d = %f\n", i + 1, determintion(N, help_matrix) / main_d);
+    }
+
+    return 0;
 }
