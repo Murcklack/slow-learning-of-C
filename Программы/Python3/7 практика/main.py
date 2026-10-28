@@ -46,6 +46,8 @@ def magichial_square(n):
     if n % 2 == 0:
         print("Братан введи нечётное")
         return 0
-    
+    numbers = []
+    matrix_r = []
+    matrix_c = []
     
 magichial_square(3)
