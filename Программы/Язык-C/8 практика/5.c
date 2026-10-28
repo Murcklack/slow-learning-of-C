@@ -23,7 +23,9 @@ int vivod_raz(char nehvatka[], int n_i, char povtor[], int p_i, char lish[], int
         printf("В b лишние: ");
         printf("%s\n", lish);
     }
-
+    if (l_i != 0 || p_i != 0 || n_i != 0){
+        return 1;
+    }
     return 0;
 }
 
@@ -73,14 +75,16 @@ int sravn(char a[], char b[])
             l_i++;
         }
     }
-    vivod_raz(nehvatka, n_i, povtor, p_i, lish, l_i);
+    if (vivod_raz(nehvatka, n_i, povtor, p_i, lish, l_i) != 0){
+        return 1;
+    }
     return 0;
 }
 
 int main()
 {
     char a[] = "listen";
-    char b[] = "txiten";
+    char b[] = "topten";
 
     if ((int)strlen(a) != (int)strlen(b))
     {
@@ -88,7 +92,12 @@ int main()
         return 0;
     }
 
-    sravn(a, b);
+    if (sravn(a,b) == 0){
+        printf("Анаграммы");
+    }
+    else{
+        printf("\nНе анаграммы\n");
+    }
 
     return 0;
 }
