@@ -1,9 +1,7 @@
 #include <stdio.h>
 
-int main(void) {
-  // [RE IM] {16,16}
-  short int complex[20] = {};
+int main(){
 
-  int re = complex[0] >> 16;
+  printf("%x %x", 0 ? 9:'9', 1 ? 9:'9');
   return 0;
 }
