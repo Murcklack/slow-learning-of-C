@@ -1,4 +1,4 @@
-from random import randint, shuffle
+from random import randint
 
 
 def method(N):
