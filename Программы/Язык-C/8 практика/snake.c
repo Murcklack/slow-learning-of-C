@@ -77,10 +77,10 @@ int main()
     }
 
     // Direction
-    int dx, dy; // вектор движения
+    int dx = 1, dy = 0; // вектор движения
 
     // Food
-    int food_index = 0;
+    int food_index;
 
     // State
     int score = 0;
@@ -99,8 +99,6 @@ int main()
     snake[2] = (rows / 2) * cols + (cols / 2 - 2);
 
     food_index = spawn_food(rows, cols, length, snake);
-    dx = 1;
-    dy = 0; // Нальное направление вправо
 
     enable_raw_mode();
     // Game looooopa
