@@ -7,7 +7,7 @@
 
 ## Что тут вообще есть?
 - [Конспекты лекций](https://github.com/Murcklack/slow-learning-of-C/tree/ca176aff4a26b645b403eaf1428fbffe7152bca7/%F0%9F%91%A9%E2%80%8D%F0%9F%92%BB%20%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
-- [test]()
+- [test](https://github.com/Murcklack/slow-learning-of-C/tree/main/test)
 - [Программы с лаб](https://github.com/Murcklack/slow-learning-of-C/tree/ca176aff4a26b645b403eaf1428fbffe7152bca7/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B/%D0%AF%D0%B7%D1%8B%D0%BA-C)
   - [8 практика](https://github.com/Murcklack/slow-learning-of-C/tree/main/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B/%D0%AF%D0%B7%D1%8B%D0%BA-C/8%20%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0)
   - [7 практика](https://github.com/Murcklack/slow-learning-of-C/tree/main/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B/%D0%AF%D0%B7%D1%8B%D0%BA-C/7%20%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0)
