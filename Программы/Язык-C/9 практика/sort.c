@@ -25,3 +25,4 @@ void bubble_sort(int *arr, int size)
         }
     }
 }
+//Не убегай, это я твой коментарий, всё хрошо
